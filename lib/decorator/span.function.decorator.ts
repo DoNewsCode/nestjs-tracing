@@ -31,7 +31,7 @@ export function SpanD(name: string): MethodDecorator {
         span = tracer.startSpan(name);
       }
 
-      const result = original.apply(target, args);
+      const result = original.apply(this, args);
 
       if (result.then) {
         result
