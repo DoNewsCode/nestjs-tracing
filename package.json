@@ -53,7 +53,7 @@
     "socket.io-client": "2.3.0",
     "ts-jest": "26.1.2",
     "ts-node": "8.10.2",
-    "typescript": "3.9.6"
+    "typescript": "3.9.7"
   },
   "peerDependencies": {
     "@nestjs/common": "^6.10.0 || ^7.0.0",
