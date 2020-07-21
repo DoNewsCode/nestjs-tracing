@@ -19,7 +19,8 @@ describe('http module', () => {
       ],
     }).compile();
     service = moduleRef.get(HttpService);
-  });
+  }, 1000 * 20);
+
   it('should start tracing span', async () => {
     const tracer = TracingModule.tracer;
     jest.spyOn(tracer, 'startSpan');
