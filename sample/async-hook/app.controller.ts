@@ -1,17 +1,22 @@
 /**
  * Created by Rain on 2020/7/17
  */
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
-import { set } from '../../lib/index';
+import { TracingHttpInterceptor } from '../../lib';
 
-@Controller()
+@Controller('/app')
+@UseInterceptors(TracingHttpInterceptor)
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
   async get(): Promise<any> {
-    set('tracingId', 'tracingId');
+    return await this.appService.get();
+  }
+
+  @Post()
+  async post(): Promise<any> {
     return await this.appService.get();
   }
 }

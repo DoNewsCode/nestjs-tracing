@@ -1,9 +1,10 @@
 /**
  * created at by Rain 2020/7/19
  */
-import * as httpContext from 'express-http-context';
-import { TracingModule } from '../tracing.module';
 import { FORMAT_TEXT_MAP, Span, Tags } from 'opentracing';
+import { AsyncContext } from '../hook';
+import { TracingModule } from '../tracing.module';
+import { TRACER_CARRIER_INFO } from '../constant';
 
 export function SpanD(name: string): MethodDecorator {
   return (
@@ -16,10 +17,10 @@ export function SpanD(name: string): MethodDecorator {
     descriptor.value = function (...args: any[]) {
       const tracer = TracingModule.tracer;
 
-      let context = httpContext.get('tracingInfo');
+      let context = AsyncContext.getInstance().get(TRACER_CARRIER_INFO);
       if (!context) {
         context = {};
-        httpContext.set('tracingInfo', context);
+        AsyncContext.getInstance().set(TRACER_CARRIER_INFO, context);
       }
 
       const ctx = tracer.extract(FORMAT_TEXT_MAP, context);

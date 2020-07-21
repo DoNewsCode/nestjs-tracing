@@ -1,20 +1,21 @@
 /**
  * Created by Rain on 2020/7/20
  */
-import { Test } from '@nestjs/testing';
+import { HttpModule, HttpService } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
 import { TracingModule } from '../lib';
-import Span from 'opentracing/lib/span';
-import { HttpService } from '@nestjs/common';
 
 describe('http module', () => {
   let service: HttpService;
+  let moduleRef: TestingModule;
   beforeAll(async () => {
-    const moduleRef = await Test.createTestingModule({
+    moduleRef = await Test.createTestingModule({
       imports: [
         TracingModule.forRoot({
           tracingOption: {},
           tracingConfig: { serviceName: 'foo' },
         }),
+        HttpModule,
       ],
     }).compile();
     service = moduleRef.get(HttpService);
@@ -24,5 +25,11 @@ describe('http module', () => {
     jest.spyOn(tracer, 'startSpan');
     const result = await service.get('http://jd.com', {}).toPromise();
     expect(tracer.startSpan).toBeCalled;
+    jest.clearAllMocks();
+    jest.clearAllTimers();
+  });
+
+  afterEach(() => {
+    moduleRef.close();
   });
 });

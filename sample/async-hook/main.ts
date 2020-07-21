@@ -3,15 +3,15 @@
  */
 import { NestFactory } from '@nestjs/core';
 
-import * as httpContext from 'express-http-context';
-
 import { AppModule } from './app.module';
+import { grpcClientOptions } from './grpc.controller';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.use(httpContext.middleware);
-  await app.listen(3000);
+  app.connectMicroservice(grpcClientOptions);
+  await app.startAllMicroservicesAsync();
+  await app.listen(3001);
 }
 
 bootstrap();

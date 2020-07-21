@@ -3,20 +3,25 @@
  */
 import { Injectable } from '@nestjs/common';
 
-import { DbService } from './service/db.service';
-import { GrpcService } from './service/grpc.service';
+import { DbService, GrpcService } from './service';
+import { AsyncContext } from '../../lib/hook';
 
 @Injectable()
 export class AppService {
   constructor(
     private readonly dbService: DbService,
     private readonly grpcService: GrpcService,
+    private readonly asyncContext: AsyncContext,
   ) {}
 
   async get(): Promise<any> {
+    const context = this.asyncContext.get('tracing');
+    context.service = 'get';
+    this.asyncContext.set('tracing', context);
+
     const dbService = await this.dbService.find();
     const grpcService = await this.grpcService.getService();
 
-    return { dbService, grpcService };
+    return { dbService, grpcService, test: this.asyncContext.get('tracing') };
   }
 }

@@ -1,19 +1,21 @@
 /**
  * created at by Rain 2020/7/18
  */
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientGrpc } from '@nestjs/microservices';
+import { Metadata } from 'grpc';
+
+import { RawService } from '../proto/raw.service';
+
 import { SpanD } from '../../../lib';
 
 @Injectable()
 export class GrpcService {
-  @SpanD('GrpcService.SpanD')
-  getService(): Promise<string> {
-    return new Promise((resolve) => {
-      const num = 1000 * Math.random();
-      const str = num + ':grpcService';
-      setTimeout(() => {
-        resolve(str);
-      }, num);
-    });
+  constructor(@Inject('RAW_SERVICE') private readonly client: ClientGrpc) {}
+
+  @SpanD('GrpcService.getService')
+  async getService(): Promise<{ data: string }> {
+    const rawService = this.client.getService<RawService>('RawService');
+    return await rawService.say({ message: 'tse' }, new Metadata()).toPromise();
   }
 }
