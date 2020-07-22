@@ -47,9 +47,6 @@ export class TracingModule
   }): DynamicModule {
     const { tracingConfig, tracingOption } = formatTracingModuleOptions(option);
 
-    const tracer: Tracer = initTracer(tracingConfig, tracingOption);
-    TracingModule.tracer = tracer;
-
     const providers: Provider[] = [];
     const tracerModuleOption: Provider<TracingModuleOptions> = {
       provide: TRACING_MODULE_OPTIONS,
@@ -59,7 +56,11 @@ export class TracingModule
 
     const tracerProvider: Provider = {
       provide: TRACER,
-      useValue: tracer,
+      useFactory() {
+        const tracer: Tracer = initTracer(tracingConfig, tracingOption);
+        TracingModule.tracer = tracer;
+        return tracer;
+      },
     };
     providers.push(tracerProvider);
 

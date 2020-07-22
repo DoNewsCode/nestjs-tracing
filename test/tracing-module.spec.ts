@@ -8,26 +8,29 @@ import { TracingModule } from '../lib';
 describe('http module', () => {
   let service: HttpService;
   let moduleRef: TestingModule;
-  beforeAll(async () => {
+  beforeEach(async () => {
     moduleRef = await Test.createTestingModule({
       imports: [
         TracingModule.forRoot({
           tracingOption: {},
-          tracingConfig: { serviceName: 'foo' },
+          tracingConfig: {
+            serviceName: 'foo',
+            sampler: { param: 1, type: 'const' },
+          },
         }),
         HttpModule,
       ],
     }).compile();
     service = moduleRef.get(HttpService);
-  }, 1000 * 20);
+  });
 
   it('should start tracing span', async () => {
-    // const tracer = TracingModule.tracer;
-    // jest.spyOn(tracer, 'startSpan');
-    // const result = await service.get('http://google.com', {}).toPromise();
-    // expect(tracer.startSpan).toBeCalled;
-    // jest.clearAllMocks();
-    // jest.clearAllTimers();
+    const tracer = TracingModule.tracer;
+    jest.spyOn(tracer, 'startSpan');
+    const result = await service.get('http://hk.jd.com', {}).toPromise();
+    expect(tracer.startSpan).toBeCalled;
+    jest.clearAllMocks();
+    jest.clearAllTimers();
   });
 
   afterEach(() => {
