@@ -1,6 +1,7 @@
 import {
   DynamicModule,
   FactoryProvider,
+  Global,
   HttpModule,
   HttpService,
   Module,
@@ -25,7 +26,7 @@ import { formatTracingModuleOptions } from './util/tracing-module-options.util';
 /**
  * Created by Rain on 2020/7/16
  */
-
+@Global()
 @Module({
   imports: [AsyncHooksModule],
   providers: [],
