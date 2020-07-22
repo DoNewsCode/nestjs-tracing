@@ -1,6 +1,6 @@
 {
   "name": "@donews/nestjs-tracing",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Nest config module",
   "author": "toonew",
   "license": "MIT",
