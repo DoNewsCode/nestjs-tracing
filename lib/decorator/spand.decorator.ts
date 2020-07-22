@@ -15,14 +15,19 @@ export function SpanD(name: string): MethodDecorator {
     const original = descriptor.value;
 
     descriptor.value = function (...args: any[]) {
-      const tracer = TracingModule.tracer;
+      let context: any;
+      try {
+        context = AsyncContext.getInstance().get(TRACER_CARRIER_INFO);
+      } catch (err) {
+        return original.apply(this, args);
+      }
 
-      let context = AsyncContext.getInstance().get(TRACER_CARRIER_INFO);
       if (!context) {
         context = {};
         AsyncContext.getInstance().set(TRACER_CARRIER_INFO, context);
       }
 
+      const tracer = TracingModule.tracer;
       const ctx = tracer.extract(FORMAT_TEXT_MAP, context);
 
       let span: Span;
