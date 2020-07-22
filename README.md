@@ -76,7 +76,7 @@ import { Module } from '@nestjs/common';
 export class AppModule {}
 ```
 
-### 3. http request interceptor
+### 3. http server receive request interceptor
 
 http-request-tracing 会自动读取 header 和 query 上的 tracingId，如果自定义了 tracingId key 值，请在模块导入 tracingOption 进行修改
 
@@ -88,10 +88,12 @@ import { UseInterceptors } from '@nestjs/common';
 export class AppController {}
 ```
 
-### 4. grpc request interceptor
+### 4. grpc client request interceptor
 
 ```typescript
 import { tracingGrpcInterceptor } from '@donews/nestjs-tracing';
+import { ClientProxyFactory } from '@nestjs/microservices';
+import { FactoryProvider } from '@nestjs/common';
 
 export const RawGrpcProvider: FactoryProvider = {
   provide: 'RAW_SERVICE',
