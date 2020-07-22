@@ -19,9 +19,11 @@
     "release": "release-it"
   },
   "dependencies": {
+    "@types/jaeger-client": "^3.15.4",
     "axios": "^0.19.2",
     "jaeger-client": "^3.18.0",
-    "opentracing": "^0.14.4"
+    "opentracing": "^0.14.4",
+    "rxjs": "^6.6.0"
   },
   "devDependencies": {
     "@commitlint/cli": "9.1.1",
@@ -36,7 +38,6 @@
     "@nestjs/testing": "7.3.2",
     "@types/express": "4.17.7",
     "@types/hapi__joi": "17.1.4",
-    "@types/jaeger-client": "3.15.4",
     "@types/jest": "26.0.5",
     "@types/node": "14.0.24",
     "@typescript-eslint/eslint-plugin": "3.7.0",
@@ -52,7 +53,6 @@
     "reflect-metadata": "0.1.13",
     "release-it": "13.6.5",
     "rimraf": "3.0.2",
-    "rxjs": "6.6.0",
     "socket.io-client": "2.3.0",
     "treeify": "1.1.0",
     "ts-jest": "26.1.3",
