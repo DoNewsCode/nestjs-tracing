@@ -26,8 +26,8 @@
     "rxjs": "^6.6.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "9.1.1",
-    "@commitlint/config-angular": "9.1.1",
+    "@commitlint/cli": "9.1.2",
+    "@commitlint/config-angular": "9.1.2",
     "@grpc/proto-loader": "0.5.5",
     "@hapi/joi": "17.1.1",
     "@nestjs/common": "7.4.2",
