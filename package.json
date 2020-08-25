@@ -45,7 +45,7 @@
     "husky": "4.2.5",
     "jaeger-client": "3.18.1",
     "jest": "26.4.2",
-    "lint-staged": "10.2.12",
+    "lint-staged": "10.2.13",
     "opentracing": "0.14.4",
     "prettier": "2.1.0",
     "reflect-metadata": "0.1.13",
