@@ -11,7 +11,8 @@ nest http tracing 工具
 ## install
 
 ```shell script
-$ npm i @donews/nestjs-logger
+$ npm i @donews/nestjs-logger jaeger-client opentracing
+$ npm i -D @types/jaeger-client
 ```
 
 ## 参数解释

@@ -10,6 +10,3 @@ export * from './tracing-http.interceptor';
 export * from './tracing-grpc.interceptor';
 
 export * from './tracing.module';
-
-export * from 'opentracing';
-export * from 'jaeger-client';
