@@ -19,7 +19,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "axios": "^0.20.0"
+    "axios": "^0.21.0"
   },
   "devDependencies": {
     "@commitlint/cli": "11.0.0",
