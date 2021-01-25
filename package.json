@@ -24,7 +24,7 @@
   "devDependencies": {
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-angular": "11.0.0",
-    "@grpc/proto-loader": "0.5.5",
+    "@grpc/proto-loader": "0.5.6",
     "@hapi/joi": "17.1.1",
     "@nestjs/common": "7.6.5",
     "@nestjs/core": "7.6.5",
